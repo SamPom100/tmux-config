@@ -1,6 +1,5 @@
 # Browser-Style Clickable Tabs & GUI Toolbar for tmux
 
-A modern, minimal `tmux` configuration featuring top browser-style clickable tabs, a GUI button toolbar, full mouse support, smart AI agent badges, and intuitive shortcuts—perfect for local use or over SSH.
 
 > ` + │ - │ ◧ │ ⬒ │ ⛶ │ 🚪 │ 🔍 │ ↕    1: 🤖 gemini: ~    2: 📁 ~    22:51 `
 
