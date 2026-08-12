@@ -35,6 +35,18 @@ git clone https://github.com/SamPom100/tmux-config.git ~/tmux-config
 cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 ```
 
+## 💡 Recommended Shell Aliases
+
+Add these to your `~/.zshrc` or `~/.bashrc`:
+
+```bash
+# 1. Detailed Session Listing (shows tabs, titles, and active folder)
+alias tls="tmux list-sessions -F '#{session_name}: #{session_windows} tab(s) | Active Tab: #W (#{pane_current_path})'"
+
+# 2. Auto-Attach (always re-connects to existing session instead of duplicating)
+alias tmux="tmux attach || tmux"
+```
+
 ## ⌨️ Controls & Shortcuts
 
 ### Toolbar Buttons (Mouse Clickable)
