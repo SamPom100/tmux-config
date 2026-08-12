@@ -1,38 +1,78 @@
-# Browser-Style Clickable Tabs for tmux
+# Browser-Style Clickable Tabs & GUI Toolbar for tmux
 
-A minimal, modern tmux configuration that gives you top, browser-style clickable tabs and full mouse support over SSH.
+A modern, minimal `tmux` configuration featuring top browser-style clickable tabs, a GUI button toolbar, full mouse support, smart AI agent badges, and intuitive shortcuts—perfect for local use or over SSH.
+
+```
+┌────┬────┬────┬────┬────┬────┬────┬────┬──────────────────┬─────────┐
+│ + │ - │ ◧ │ ⬒ │ 💀 │ ⛶ │ 🔍 │ ↕ │  1: 🤖 gemini: ~ │  2: 📁 ~ │  22:45  │
+└────┴────┴────┴────┴────┴────┴────┴────┴──────────────────┴─────────┘
+```
 
 ## Features
 
-- 🗂️ **Top Status Bar**: Tab bar at the top of the terminal screen, styled like browser tabs.
-- 🖱️ **Full Mouse Support**: Click tab titles to switch windows, drag pane borders to resize, scroll wheel enabled.
-- 🔢 **1-Based Indexing**: Tabs start at `1` to align naturally with keyboard shortcuts (`Ctrl-b 1`, `Ctrl-b 2`, etc.).
-- 🔄 **Auto-Renumbering**: Automatically cleans up tab numbering when tabs are closed.
-- 🏷️ **Automatic Window Titles**: Tabs show the active running command or directory name automatically.
+- 🗂️ **Top Status Bar**: Browser-style tabs pinned across the top of your terminal window.
+- 🖱️ **Clickable GUI Toolbar**: Top-left mouse buttons for quick actions:
+  - ` + ` — New Tab
+  - ` - ` — Close Active Tab *(Exits tmux if last tab!)*
+  - ` ◧ ` — Split Screen Side-by-Side (Vertical)
+  - ` ⬒ ` — Split Screen Top/Bottom (Horizontal)
+  - ` 💀 ` — Kill Active Split Pane
+  - ` ⛶ ` — Zoom / Fullscreen Toggle
+  - ` 🔍 ` — Search Text Across All Tabs
+  - ` ↕ ` — Scroll / History Mode Toggle (Click to turn ON/OFF)
+- 🤖 **Smart AI Agent Badges**: Automatic `🤖 gemini: ~` or `🤖 agy: ~` badges when running AI CLIs, and `📁 ~` for clean folder paths.
+- 🔢 **1-Based Indexing & Auto-Renumbering**: Tabs start at `1` (`Ctrl-b 1`, `Ctrl-b 2`) and renumber automatically when closed.
+- 📋 **System Clipboard & Mouse Support**: Click to select panes/tabs, drag borders to resize, scroll history with mouse wheel, and auto-copy highlights to Mac clipboard.
 
-## Quick Installation
+## ⚡ Quick 1-Line Installation
 
-### Option 1: Direct Download (One-liner for local or SSH server)
+Run this single command on any local computer or SSH server:
 
 ```bash
-curl -sL https://gist.githubusercontent.com/SamPom100/80369305e20cea359d97946ef742fa82/raw/.tmux.conf -o ~/.tmux.conf
+curl -sL https://raw.githubusercontent.com/SamPom100/tmux-config/main/.tmux.conf -o ~/.tmux.conf
 ```
 
-### Option 2: Clone repository
+Or clone the repository:
 
 ```bash
 git clone https://github.com/SamPom100/tmux-config.git ~/tmux-config
 cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 ```
 
-## Basic Usage
+## ⌨️ Controls & Shortcuts
 
-| Action | Command / Shortcut |
+### Toolbar Buttons (Mouse Clickable)
+
+| Button | Action |
 |---|---|
-| **Start tmux** | `tmux` |
-| **Switch Tabs** | **Click tab title at top** or `Ctrl-b <number>` |
-| **New Tab** | `Ctrl-b c` |
-| **Rename Tab** | `Ctrl-b ,` |
-| **Close Tab** | Type `exit` or `Ctrl-d` |
-| **Vertical Split** | `Ctrl-b %` |
-| **Horizontal Split** | `Ctrl-b "` |
+| **` + `** | **New Tab** *(opens in current folder)* |
+| **` - `** | **Close Active Tab** *(exits tmux if last tab)* |
+| **` \| `** | **Split Side-by-Side** (Vertical) |
+| **` _ `** | **Split Top/Bottom** (Horizontal) |
+| **` 💀 `** | **Kill Active Split Pane** |
+| **` ⛶ `** | **Zoom / Fullscreen Toggle** *(expands pane to 100%)* |
+| **` 🔍 `** | **Search All Tabs** *(prompts for search query)* |
+| **` ↕ `** | **Scroll Mode Toggle** *(click to enter/exit history)* |
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| **Click Tab Title** | Switch directly to tab |
+| `Ctrl-b` then `1` .. `9` | Jump directly to Tab 1-9 |
+| `Ctrl-b` then `c` | New Tab |
+| `Ctrl-b` then `,` | Rename current tab |
+| `Ctrl-b` then `\|` | Split Side-by-Side |
+| `Ctrl-b` then `-` | Split Top/Bottom |
+| `Ctrl-b` then `z` | Zoom / Fullscreen toggle active pane |
+| `Ctrl-b` then `/` | Search text in current tab |
+| `Ctrl-b` then `Shift-S` | Search text across ALL tabs |
+| `Ctrl-b` then `f` | Open clean 1-line tab list |
+| `Ctrl-b` then `d` | Detach session *(keeps processes running in background)* |
+
+---
+
+### Reconnect Anytime
+```bash
+tmux attach
+```
