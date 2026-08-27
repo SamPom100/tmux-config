@@ -1,7 +1,7 @@
 # Browser-Style Clickable Tabs & GUI Toolbar for tmux
 
 
-> ` + │ - │ ◧ │ ⬒ │ ⛶ │ 🚪 │ 🔍 │ ↕    1: 🤖 gemini: ~    2: 📁 ~    22:51 `
+> ` + │ - │ ◧ │ ⬒ │ ⛶ │ 🚪 │ 🖱 │ ↕    1: 🤖 gemini: ~    2: 📁 ~    22:51 `
 
 ## Features
 
@@ -13,7 +13,7 @@
   - ` ⬒ ` — Split Screen Top/Bottom (Horizontal)
   - ` ⛶ ` — Zoom / Fullscreen Toggle *(expands active pane to 100%)*
   - ` 🚪 ` — **Detach Session** *(exits to shell, leaving all tabs/agents running in background)*
-  - ` 🔍 ` — Search Text Across All Open Tabs
+  - ` 🖱 ` — Disable Mouse Support for 5 Seconds
   - ` ↕ ` — Scroll / History Mode Toggle *(click to turn ON/OFF)*
 - 🤖 **Smart AI Agent Badges**: Automatic `🤖 gemini: ~` or `🤖 agy: ~` badges when running AI CLIs, and `📁 ~` for clean folder paths.
 - 🔢 **1-Based Indexing & Auto-Renumbering**: Tabs start at `1` (`Ctrl-b 1`, `Ctrl-b 2`) and renumber automatically when closed.
@@ -58,7 +58,7 @@ alias tmux="tmux attach || tmux"
 | **` _ `** | **Split Top/Bottom** (Horizontal) |
 | **` ⛶ `** | **Zoom / Fullscreen Toggle** *(expands pane to 100%)* |
 | **` 🚪 `** | **Detach Session** *(leave running in background)* |
-| **` 🔍 `** | **Search All Tabs** *(prompts for search query)* |
+| **` 🖱 `** | **Disable Mouse Support** *(automatically enables after 5 seconds)* |
 | **` ↕ `** | **Scroll Mode Toggle** *(click to enter/exit history)* |
 
 ### Keyboard Shortcuts
@@ -75,6 +75,7 @@ alias tmux="tmux attach || tmux"
 | `Ctrl-b` then `d` | Detach session *(leave running in background)* |
 | `Ctrl-b` then `/` | Search text in current tab |
 | `Ctrl-b` then `Shift-S` | Search text across ALL tabs |
+| `Ctrl-b` then `m` | Toggle mouse support |
 | `Ctrl-b` then `f` | Open clean 1-line tab list |
 
 ---
