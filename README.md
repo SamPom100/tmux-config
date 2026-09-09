@@ -36,33 +36,17 @@ cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 
 ## 💡 Shell Shortcuts (zsh)
 
+Download [tmux.zsh](tmux.zsh):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/SamPom100/tmux-config/main/tmux.zsh -o ~/.tmux.zsh
+```
+
 If your `~/.zshrc` contains `alias tmux="tmux attach || tmux"`, remove that line.
-Add this configuration to your `~/.zshrc`:
+Add this line to your `~/.zshrc`:
 
 ```zsh
-autoload -Uz compinit
-compinit
-
-alias tls="tmux list-sessions -F '#{session_name}: #{session_windows} tab(s) | Active Tab: #W (#{pane_current_path})' 2>/dev/null || print -r -- 'nothing running'"
-
-function attach() {
-   if (( $# > 0 )); then
-      tmux attach-session -t "$1"
-   elif [[ -n "$TMUX" ]]; then
-      tmux choose-tree -sZ
-   else
-      tmux attach-session \; choose-tree -sZ
-   fi
-}
-
-function _attach() {
-   local -a sessions
-   sessions=("${(@f)$(tmux list-sessions -F '#S' 2>/dev/null)}")
-   _describe -t sessions 'tmux session' sessions
-}
-
-compdef _attach attach
-zstyle ':completion:*:*:attach:*' menu yes select
+source "$HOME/.tmux.zsh"
 ```
 
 Open a new terminal to load the shortcuts.
