@@ -34,17 +34,45 @@ git clone https://github.com/SamPom100/tmux-config.git ~/tmux-config
 cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 ```
 
-## 💡 Recommended Shell Aliases
+## 💡 Shell Shortcuts (zsh)
 
-Add these to your `~/.zshrc` or `~/.bashrc`:
+If your `~/.zshrc` contains `alias tmux="tmux attach || tmux"`, remove that line.
+Add this configuration to your `~/.zshrc`:
 
-```bash
-# 1. Detailed Session Listing (shows tabs, titles, and active folder)
-alias tls="tmux list-sessions -F '#{session_name}: #{session_windows} tab(s) | Active Tab: #W (#{pane_current_path})'"
+```zsh
+autoload -Uz compinit
+compinit
 
-# 2. Auto-Attach (always re-connects to existing session instead of duplicating)
-alias tmux="tmux attach || tmux"
+alias tls="tmux list-sessions -F '#{session_name}: #{session_windows} tab(s) | Active Tab: #W (#{pane_current_path})' 2>/dev/null || print -r -- 'nothing running'"
+
+function attach() {
+   if (( $# > 0 )); then
+      tmux attach-session -t "$1"
+   elif [[ -n "$TMUX" ]]; then
+      tmux choose-tree -sZ
+   else
+      tmux attach-session \; choose-tree -sZ
+   fi
+}
+
+function _attach() {
+   local -a sessions
+   sessions=("${(@f)$(tmux list-sessions -F '#S' 2>/dev/null)}")
+   _describe -t sessions 'tmux session' sessions
+}
+
+compdef _attach attach
+zstyle ':completion:*:*:attach:*' menu yes select
 ```
+
+Open a new terminal to load the shortcuts.
+
+| Command | Behavior |
+|---|---|
+| `tls` | Lists sessions, or prints `nothing running` when no sessions exist. |
+| `attach` | Opens the session selector. |
+| `attach <name>` | Attaches to the named session. |
+| `attach ` then Tab | Shows session names and completes partial names. |
 
 ## ⌨️ Controls & Shortcuts
 
@@ -66,6 +94,7 @@ alias tmux="tmux attach || tmux"
 | Shortcut | Action |
 |---|---|
 | **Click Tab Title** | Switch directly to tab |
+| **Right-click Top-Left Toolbar**, then **Rename** | Rename current session |
 | `Ctrl-b` then `1` .. `9` | Jump directly to Tab 1-9 |
 | `Ctrl-b` then `c` | New Tab |
 | `Ctrl-b` then `,` | Rename current tab |
