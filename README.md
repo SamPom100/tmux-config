@@ -16,6 +16,7 @@
   - ` 🖱 `: Release mouse capture for five seconds
   - ` ↕ ` — Scroll / History Mode Toggle *(click to turn ON/OFF)*
 - 🤖 **Smart AI Agent Badges**: Automatic `🤖 gemini: ~` or `🤖 agy: ~` badges when running AI CLIs, and `📁 ~` for clean folder paths.
+- 🏷️ **Auto-Named Sessions**: Numbered sessions running Claude Code or Codex take a lowercase name from the agent task title, such as `review-cr-309447414-test-request`. The name follows the task until you rename the session by hand.
 - 🔢 **1-Based Indexing & Auto-Renumbering**: Tabs start at `1` (`Ctrl-b 1`, `Ctrl-b 2`) and renumber automatically when closed.
 - 📋 **System Clipboard & Mouse Support**: Click the mouse button for native text selection. Mouse capture returns after five seconds.
 
