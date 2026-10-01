@@ -13,11 +13,11 @@
   - ` ⬒ ` — Split Screen Top/Bottom (Horizontal)
   - ` ⛶ ` — Zoom / Fullscreen Toggle *(expands active pane to 100%)*
   - ` 🚪 ` — **Detach Session** *(exits to shell, leaving all tabs/agents running in background)*
-  - ` 🖱 ` — Disable Mouse Support for 5 Seconds
+  - ` 🖱 `: Release mouse capture for five seconds
   - ` ↕ ` — Scroll / History Mode Toggle *(click to turn ON/OFF)*
 - 🤖 **Smart AI Agent Badges**: Automatic `🤖 gemini: ~` or `🤖 agy: ~` badges when running AI CLIs, and `📁 ~` for clean folder paths.
 - 🔢 **1-Based Indexing & Auto-Renumbering**: Tabs start at `1` (`Ctrl-b 1`, `Ctrl-b 2`) and renumber automatically when closed.
-- 📋 **System Clipboard & Mouse Support**: Click to select panes/tabs, drag borders to resize, scroll history with mouse wheel, and auto-copy highlights to Mac clipboard.
+- 📋 **System Clipboard & Mouse Support**: Click the mouse button for native text selection. Mouse capture returns after five seconds.
 
 ## ⚡ Quick 1-Line Installation
 
@@ -70,7 +70,7 @@ Open a new terminal to load the shortcuts.
 | **` _ `** | **Split Top/Bottom** (Horizontal) |
 | **` ⛶ `** | **Zoom / Fullscreen Toggle** *(expands pane to 100%)* |
 | **` 🚪 `** | **Detach Session** *(leave running in background)* |
-| **` 🖱 `** | **Disable Mouse Support** *(automatically enables after 5 seconds)* |
+| **` 🖱 `** | **Release mouse capture for five seconds** |
 | **` ↕ `** | **Scroll Mode Toggle** *(click to enter/exit history)* |
 
 ### Keyboard Shortcuts
