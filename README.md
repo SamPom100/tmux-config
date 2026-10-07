@@ -35,6 +35,35 @@ git clone https://github.com/SamPom100/tmux-config.git ~/tmux-config
 cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 ```
 
+### Codex goal titles
+
+Codex can omit the task title for a session that starts with `/goal`.
+The optional hook uses the goal text until Codex supplies a task title.
+It reads the local goal database and updates only the tmux pane.
+
+From this checkout, install the hook:
+
+```sh
+mkdir -p ~/.codex/hooks
+cp codex_tmux_title.py ~/.codex/hooks/
+```
+
+Add this handler to both `SessionStart` and `PreToolUse` in `~/.codex/hooks.json`:
+
+```json
+{
+  "type": "command",
+  "command": "python3 \"$HOME/.codex/hooks/codex_tmux_title.py\"",
+  "timeout": 5
+}
+```
+
+For `SessionStart`, use the matcher `startup|resume|clear|compact`.
+For `PreToolUse`, use a new group without a matcher.
+Keep the existing handlers.
+Use `/hooks` in Codex to review and trust the new handlers.
+Then start a new Codex session.
+
 ## 💡 Shell Shortcuts (zsh)
 
 Download [tmux.zsh](tmux.zsh):
