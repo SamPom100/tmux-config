@@ -66,6 +66,40 @@ Keep the existing handlers.
 Use `/hooks` in Codex to review and trust the new handlers.
 Then start a new Codex session.
 
+### Claude Code goal titles
+
+Claude Code does not make a session title when the first prompt is `/goal`.
+The tab then shows `✳ Claude Code`.
+The optional hook sets the session title from the goal text.
+It shortens URLs the same way as the Codex hook.
+It acts only when the session has no title.
+Other sessions keep the title from Claude Code.
+
+From this checkout, install the hook:
+
+```sh
+mkdir -p ~/.claude/hooks
+cp claude_goal_title.py ~/.claude/hooks/
+```
+
+Add this group to `hooks.UserPromptSubmit` in `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": [
+    {
+      "type": "command",
+      "command": "python3 \"$HOME/.claude/hooks/claude_goal_title.py\"",
+      "timeout": 5
+    }
+  ]
+}
+```
+
+Keep the existing hooks.
+A running session loads the hook and sets its title on the next prompt.
+The hook was tested with Claude Code 2.1.280.
+
 ## 💡 Shell Shortcuts (zsh)
 
 Download [tmux.zsh](tmux.zsh):
