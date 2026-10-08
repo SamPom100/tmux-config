@@ -7,6 +7,32 @@ import re
 import sqlite3
 import subprocess
 import sys
+from urllib.parse import urlsplit
+
+
+def url_label(match):
+    parts = [part for part in urlsplit(match.group(0)).path.split("/") if part]
+    for part in parts:
+        if re.fullmatch(r"[A-Za-z]+-\d+", part):
+            return part
+    named = [part for part in parts if re.search(r"[A-Za-z]", part)]
+    return named[-1] if named else ""
+
+
+def clean_title(text):
+    title = re.sub(r"https?://\S+", url_label, text)
+    title = " ".join(re.sub(r"[^\w .,:!?'/()-]", " ", title).split())
+    if len(title) > 80:
+        title = title[:81].rsplit(" ", 1)[0][:80]
+    return title
+
+
+def query_one(database, sql, thread_id):
+    if not database.is_file():
+        return None
+    with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True, timeout=0.2) as connection:
+        row = connection.execute(sql, (thread_id,)).fetchone()
+    return row[0] if row and row[0] else None
 
 
 def main():
@@ -25,19 +51,16 @@ def main():
         return
 
     codex_home = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex"))
-    database = codex_home / "goals_1.sqlite"
-    title = ""
-    if database.is_file():
-        with sqlite3.connect(database.resolve().as_uri() + "?mode=ro", uri=True, timeout=0.2) as connection:
-            goal = connection.execute(
-                "SELECT objective FROM thread_goals WHERE thread_id = ?",
-                (event["session_id"],),
-            ).fetchone()
-        if goal:
-            title = re.sub(r"https?://\S+", "", goal[0])
-            title = " ".join(re.sub(r"[^\w .,:!?'/()-]", " ", title).split())
-            if len(title) > 80:
-                title = title[:81].rsplit(" ", 1)[0][:80]
+    text = query_one(
+        codex_home / "goals_1.sqlite",
+        "SELECT objective FROM thread_goals WHERE thread_id = ?",
+        event["session_id"],
+    ) or query_one(
+        codex_home / "state_5.sqlite",
+        "SELECT first_user_message FROM threads WHERE id = ?",
+        event["session_id"],
+    )
+    title = clean_title(text) if text else ""
 
     tmux = ["tmux", "-S", socket]
     current = subprocess.run(

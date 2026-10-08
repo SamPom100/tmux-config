@@ -37,9 +37,11 @@ cp ~/tmux-config/.tmux.conf ~/.tmux.conf
 
 ### Codex goal titles
 
-Codex can omit the task title for a session that starts with `/goal`.
-The optional hook uses the goal text until Codex supplies a task title.
-It reads the local goal database and updates only the tmux pane.
+Codex can omit the task title for a session.
+This happens when the session starts with `/goal`, and sometimes after a normal first prompt.
+The optional hook uses the goal text, or else the first prompt, until Codex supplies a task title.
+A URL in the text becomes its ticket or CR ID, or else its last named path segment.
+It reads the local Codex databases and updates only the tmux pane.
 
 From this checkout, install the hook:
 
